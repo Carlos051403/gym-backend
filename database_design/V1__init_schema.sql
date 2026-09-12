@@ -334,7 +334,7 @@ CREATE TABLE IF NOT EXISTS `movimiento_inventario` (
   `id_suplemento_fk` INT UNSIGNED NOT NULL,
   `id_detalle_compra_fk` INT UNSIGNED NULL,
   `detalle_venta_id_detalle_venta` INT UNSIGNED NULL,
-  `created_at` DATETIME NOT NULL DEFAULT URRENT_TIMESTAMP,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_movimiento_inventario`),
   INDEX `fk_movimiento_inventario_suplemento1_idx` (`id_suplemento_fk` ASC),
