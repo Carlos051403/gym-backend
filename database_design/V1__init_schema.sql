@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `activo` TINYINT(1) NOT NULL DEFAULT 1,
   `id_rol_fk` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id_usuario`),
-  UNIQUE INDEX `id_usuario_UNIQUE` (`id_usuario` ASC) VISIBLE,
-  INDEX `fk_usuario_rol_idx` (`id_rol_fk` ASC) VISIBLE,
+  UNIQUE INDEX `id_usuario_UNIQUE` (`id_usuario` ASC),
+  INDEX `fk_usuario_rol_idx` (`id_rol_fk` ASC),
   CONSTRAINT `fk_usuario_rol`
     FOREIGN KEY (`id_rol_fk`)
     REFERENCES `rol` (`id_rol`)
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `grupo_muscular` (
   `id_grupo_muscular` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre_grupo_muscular` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id_grupo_muscular`),
-  UNIQUE INDEX `nombre_grupo_muscular_UNIQUE` (`nombre_grupo_muscular` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_grupo_muscular_UNIQUE` (`nombre_grupo_muscular` ASC))
 ENGINE = InnoDB;
 
 
@@ -61,8 +61,8 @@ CREATE TABLE IF NOT EXISTS `ejercicio` (
   `enlace_video` VARCHAR(255) NOT NULL,
   `id_grupo_muscular_fk` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id_ejercicio`),
-  UNIQUE INDEX `nombre_ejercicio_UNIQUE` (`nombre_ejercicio` ASC) VISIBLE,
-  INDEX `fk_ejercicio_grupo_muscular1_idx` (`id_grupo_muscular_fk` ASC) VISIBLE,
+  UNIQUE INDEX `nombre_ejercicio_UNIQUE` (`nombre_ejercicio` ASC),
+  INDEX `fk_ejercicio_grupo_muscular1_idx` (`id_grupo_muscular_fk` ASC),
   CONSTRAINT `fk_ejercicio_grupo_muscular1`
     FOREIGN KEY (`id_grupo_muscular_fk`)
     REFERENCES `grupo_muscular` (`id_grupo_muscular`)
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `objetivo` (
   `id_objetivo` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre_objetivo` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id_objetivo`),
-  UNIQUE INDEX `nombre_objetivo_UNIQUE` (`nombre_objetivo` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_objetivo_UNIQUE` (`nombre_objetivo` ASC))
 ENGINE = InnoDB;
 
 
@@ -90,8 +90,8 @@ CREATE TABLE IF NOT EXISTS `rutina` (
   `nombre_rutina` VARCHAR(100) NOT NULL,
   `id_objetivo_fk` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id_rutina`),
-  UNIQUE INDEX `nombre_rutina_UNIQUE` (`nombre_rutina` ASC) VISIBLE,
-  INDEX `fk_rutina_objetivo1_idx` (`id_objetivo_fk` ASC) VISIBLE,
+  UNIQUE INDEX `nombre_rutina_UNIQUE` (`nombre_rutina` ASC),
+  INDEX `fk_rutina_objetivo1_idx` (`id_objetivo_fk` ASC),
   CONSTRAINT `fk_rutina_objetivo1`
     FOREIGN KEY (`id_objetivo_fk`)
     REFERENCES `objetivo` (`id_objetivo`)
@@ -113,8 +113,8 @@ CREATE TABLE IF NOT EXISTS `detalle_rutina` (
   `id_ejercicio_fk` INT UNSIGNED NOT NULL,
   `id_rutina_fk` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id_programa_entrenamiento`),
-  INDEX `fk_programa_entrenamiento_ejercicio1_idx` (`id_ejercicio_fk` ASC) VISIBLE,
-  INDEX `fk_programa_entrenamiento_rutina1_idx` (`id_rutina_fk` ASC) VISIBLE,
+  INDEX `fk_programa_entrenamiento_ejercicio1_idx` (`id_ejercicio_fk` ASC),
+  INDEX `fk_programa_entrenamiento_rutina1_idx` (`id_rutina_fk` ASC),
   CONSTRAINT `fk_programa_entrenamiento_ejercicio1`
     FOREIGN KEY (`id_ejercicio_fk`)
     REFERENCES `ejercicio` (`id_ejercicio`)
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `marca_fabricante` (
   `id_marca_fabricante` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre_marca_fabricante` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`id_marca_fabricante`),
-  UNIQUE INDEX `nombre_marca_fabricante_UNIQUE` (`nombre_marca_fabricante` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_marca_fabricante_UNIQUE` (`nombre_marca_fabricante` ASC))
 ENGINE = InnoDB;
 
 
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `impuesto` (
   `nombre_impuesto` VARCHAR(150) NOT NULL,
   `porcentaje_impuesto` DECIMAL(5,2) NOT NULL,
   PRIMARY KEY (`id_impuesto`),
-  UNIQUE INDEX `nombre_impuesto_UNIQUE` (`nombre_impuesto` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_impuesto_UNIQUE` (`nombre_impuesto` ASC))
 ENGINE = InnoDB;
 
 
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `proveedor` (
   `id_proveedor` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre_proveedor` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`id_proveedor`),
-  UNIQUE INDEX `nombre_proveedor_UNIQUE` (`nombre_proveedor` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_proveedor_UNIQUE` (`nombre_proveedor` ASC))
 ENGINE = InnoDB;
 
 
@@ -190,12 +190,12 @@ CREATE TABLE IF NOT EXISTS `suplemento` (
   `id_marca_fabricante_fk` INT UNSIGNED NOT NULL,
   `id_impuesto_fk` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id_suplemento`),
-  UNIQUE INDEX `codigo_barras_UNIQUE` (`codigo_barras` ASC) VISIBLE,
-  UNIQUE INDEX `sku_interno_UNIQUE` (`sku_interno` ASC) VISIBLE,
-  UNIQUE INDEX `nombre_suplemento_UNIQUE` (`nombre_suplemento` ASC) VISIBLE,
-  INDEX `fk_suplemento_categoria1_idx` (`id_categoria_fk` ASC) VISIBLE,
-  INDEX `fk_suplemento_marca_fabricante1_idx` (`id_marca_fabricante_fk` ASC) VISIBLE,
-  INDEX `fk_suplemento_impuesto1_idx` (`id_impuesto_fk` ASC) VISIBLE,
+  UNIQUE INDEX `codigo_barras_UNIQUE` (`codigo_barras` ASC),
+  UNIQUE INDEX `sku_interno_UNIQUE` (`sku_interno` ASC),
+  UNIQUE INDEX `nombre_suplemento_UNIQUE` (`nombre_suplemento` ASC),
+  INDEX `fk_suplemento_categoria1_idx` (`id_categoria_fk` ASC),
+  INDEX `fk_suplemento_marca_fabricante1_idx` (`id_marca_fabricante_fk` ASC),
+  INDEX `fk_suplemento_impuesto1_idx` (`id_impuesto_fk` ASC),
   CONSTRAINT `fk_suplemento_categoria1`
     FOREIGN KEY (`id_categoria_fk`)
     REFERENCES `categoria` (`id_categoria`)
@@ -225,8 +225,8 @@ CREATE TABLE IF NOT EXISTS `compra` (
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_compra`),
-  UNIQUE INDEX `numero_factura_externa_UNIQUE` (`numero_factura_externa` ASC) VISIBLE,
-  INDEX `fk_compra_proveedor1_idx` (`id_proveedor_fk` ASC) VISIBLE,
+  UNIQUE INDEX `numero_factura_externa_UNIQUE` (`numero_factura_externa` ASC),
+  INDEX `fk_compra_proveedor1_idx` (`id_proveedor_fk` ASC),
   CONSTRAINT `fk_compra_proveedor1`
     FOREIGN KEY (`id_proveedor_fk`)
     REFERENCES `proveedor` (`id_proveedor`)
@@ -248,8 +248,8 @@ CREATE TABLE IF NOT EXISTS `detalle_compra` (
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_detalle_compra`),
-  INDEX `fk_detalle_compra_compra1_idx` (`id_compra_fk` ASC) VISIBLE,
-  INDEX `fk_detalle_compra_suplemento1_idx` (`id_suplemento_fk` ASC) VISIBLE,
+  INDEX `fk_detalle_compra_compra1_idx` (`id_compra_fk` ASC),
+  INDEX `fk_detalle_compra_suplemento1_idx` (`id_suplemento_fk` ASC),
   CONSTRAINT `fk_detalle_compra_compra1`
     FOREIGN KEY (`id_compra_fk`)
     REFERENCES `compra` (`id_compra`)
@@ -279,9 +279,9 @@ CREATE TABLE IF NOT EXISTS `venta` (
   `create_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_venta`),
-  INDEX `fk_venta_usuario1_idx` (`id_cliente_fk` ASC) VISIBLE,
-  INDEX `fk_venta_usuario2_idx` (`id_empleado_fk` ASC) VISIBLE,
-  UNIQUE INDEX `numero_factura_interna_UNIQUE` (`numero_factura_interna` ASC) VISIBLE,
+  INDEX `fk_venta_usuario1_idx` (`id_cliente_fk` ASC),
+  INDEX `fk_venta_usuario2_idx` (`id_empleado_fk` ASC),
+  UNIQUE INDEX `numero_factura_interna_UNIQUE` (`numero_factura_interna` ASC),
   CONSTRAINT `fk_venta_usuario1`
     FOREIGN KEY (`id_cliente_fk`)
     REFERENCES `usuario` (`id_usuario`)
@@ -308,8 +308,8 @@ CREATE TABLE IF NOT EXISTS `detalle_venta` (
   `create_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_detalle_venta`),
-  INDEX `fk_detalle_venta_venta1_idx` (`id_venta_fk` ASC) VISIBLE,
-  INDEX `fk_detalle_venta_suplemento1_idx` (`id_suplemento_fk` ASC) VISIBLE,
+  INDEX `fk_detalle_venta_venta1_idx` (`id_venta_fk` ASC),
+  INDEX `fk_detalle_venta_suplemento1_idx` (`id_suplemento_fk` ASC),
   CONSTRAINT `fk_detalle_venta_venta1`
     FOREIGN KEY (`id_venta_fk`)
     REFERENCES `venta` (`id_venta`)
@@ -337,9 +337,9 @@ CREATE TABLE IF NOT EXISTS `movimiento_inventario` (
   `created_at` DATETIME NOT NULL DEFAULT URRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_movimiento_inventario`),
-  INDEX `fk_movimiento_inventario_suplemento1_idx` (`id_suplemento_fk` ASC) VISIBLE,
-  INDEX `fk_movimiento_inventario_detalle_compra1_idx` (`id_detalle_compra_fk` ASC) VISIBLE,
-  INDEX `fk_movimiento_inventario_detalle_venta1_idx` (`detalle_venta_id_detalle_venta` ASC) VISIBLE,
+  INDEX `fk_movimiento_inventario_suplemento1_idx` (`id_suplemento_fk` ASC),
+  INDEX `fk_movimiento_inventario_detalle_compra1_idx` (`id_detalle_compra_fk` ASC),
+  INDEX `fk_movimiento_inventario_detalle_venta1_idx` (`detalle_venta_id_detalle_venta` ASC),
   CONSTRAINT `fk_movimiento_inventario_suplemento1`
     FOREIGN KEY (`id_suplemento_fk`)
     REFERENCES `suplemento` (`id_suplemento`)
@@ -368,8 +368,8 @@ CREATE TABLE IF NOT EXISTS `usuario_rutina` (
   `id_usuario_fk` INT UNSIGNED NOT NULL,
   `id_rutina_fk` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id_usuario_rutina`),
-  INDEX `fk_usuario_rutina_usuario1_idx` (`id_usuario_fk` ASC) VISIBLE,
-  INDEX `fk_usuario_rutina_usuario2_idx` (`id_rutina_fk` ASC) VISIBLE,
+  INDEX `fk_usuario_rutina_usuario1_idx` (`id_usuario_fk` ASC),
+  INDEX `fk_usuario_rutina_usuario2_idx` (`id_rutina_fk` ASC),
   CONSTRAINT `fk_usuario_rutina_usuario1`
     FOREIGN KEY (`id_usuario_fk`)
     REFERENCES `usuario` (`id_usuario`)
@@ -393,7 +393,7 @@ CREATE TABLE IF NOT EXISTS `sesion_entrenamiento` (
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_sesion_entrenamiento`),
-  INDEX `fk_sesion_entrenamiento_usuario1_idx` (`id_cliente_fk` ASC) VISIBLE,
+  INDEX `fk_sesion_entrenamiento_usuario1_idx` (`id_cliente_fk` ASC),
   CONSTRAINT `fk_sesion_entrenamiento_usuario1`
     FOREIGN KEY (`id_cliente_fk`)
     REFERENCES `usuario` (`id_usuario`)
@@ -414,8 +414,8 @@ CREATE TABLE IF NOT EXISTS `registro_serie` (
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_registro_serie`),
-  INDEX `fk_registro_serie_sesion_entrenamiento1_idx` (`id_sesion_entrenamiento_fk` ASC) VISIBLE,
-  INDEX `fk_registro_serie_ejercicio1_idx` (`id_ejercicio_fk` ASC) VISIBLE,
+  INDEX `fk_registro_serie_sesion_entrenamiento1_idx` (`id_sesion_entrenamiento_fk` ASC),
+  INDEX `fk_registro_serie_ejercicio1_idx` (`id_ejercicio_fk` ASC),
   CONSTRAINT `fk_registro_serie_sesion_entrenamiento1`
     FOREIGN KEY (`id_sesion_entrenamiento_fk`)
     REFERENCES `sesion_entrenamiento` (`id_sesion_entrenamiento`)
